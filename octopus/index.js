@@ -2,34 +2,34 @@ const path = require("path");
 const CONFIG_FILE_PATH = path.resolve(path.join(__dirname, "./../octopus.json"));
 console.log(CONFIG_FILE_PATH);
 
-function createBasicConfig(...configParts){
-	return {"workDir":".","dependencies":[...configParts]};
+function createBasicConfig(...configParts) {
+	return {"workDir": ".", "dependencies": [...configParts]};
 }
 
-function readConfig(){
+function readConfig() {
 	let config;
-	try{
+	try {
 		config = require(CONFIG_FILE_PATH);
-	}catch(err){
-		if(err.code === "MODULE_NOT_FOUND"){
+	} catch (err) {
+		if (err.code === "MODULE_NOT_FOUND") {
 			config = createBasicConfig();
-		}else{
+		} else {
 			throw err;
 		}
 	}
 	return config;
 }
 
-function updateConfig(config, callback){
+function updateConfig(config, callback) {
 	const fs = require("fs");
-	try{
+	try {
 		fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config), callback);
-	}catch (e) {
+	} catch (e) {
 		callback(e);
 	}
 }
 
-function runConfig(config, callback){
+function runConfig(config, callback) {
 	const updater = require("deployer");
 
 	updater.setTag("[Octopus]");

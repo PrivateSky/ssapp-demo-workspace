@@ -8,6 +8,7 @@
     "add": "node ./octopus/add",
     "postadd": "node ./octopus/install",
     "build": "node ./octopus/build",
+    "update": "node ./octopus/update.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
