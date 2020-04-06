@@ -1,0 +1,27 @@
+{
+  "name": "web-wallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node ./octopus/install",
+    "add": "node ./octopus/add",
+    "postadd": "node ./octopus/install",
+    "build": "node ./octopus/build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrivateSky/web-wallet.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PrivateSky/web-wallet/issues"
+  },
+  "homepage": "https://github.com/PrivateSky/web-wallet#readme",
+  "dependencies": {
+    "deployer": "git+http://github.com/privatesky/updater.git",
+    "local-web-server": "^4.0.0"
+  }
+}
