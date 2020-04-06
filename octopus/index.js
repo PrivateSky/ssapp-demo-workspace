@@ -13,6 +13,22 @@ function readConfig() {
 	} catch (err) {
 		if (err.code === "MODULE_NOT_FOUND") {
 			config = createBasicConfig();
+			// we need a default privatesky instance in order to have access to Brick Storage
+			config.dependencies.push(
+				{
+					"name": "psk-release",
+					"src": "http://github.com/privatesky/psk-release.git",
+					"actions": [
+						{
+							"type": "smartClone",
+							"target": "."
+						},
+						{
+							"type": "execute",
+							"cmd": "cd ./psk-release && npm install"
+						}
+					]
+				});
 		} else {
 			throw err;
 		}
