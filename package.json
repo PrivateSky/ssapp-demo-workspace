@@ -10,7 +10,7 @@
     "build": "node ./octopus/build",
     "update": "node ./octopus/update",
     "bind": "node ./octopus/bind",
-    "brick-storage": "cd privastesky && npm run start",
+    "brick-storage": "node ./octopus/setEnv --file=../env.json \"cd privatesky && npm run start\"",
     "web-server": "ws --spa ./web-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
