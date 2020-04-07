@@ -5,6 +5,7 @@
 !.gitignore
 !octopus
 !octopus/*
+!octopus.json
 !LICENSE
 !package.json
 !package-lock.json

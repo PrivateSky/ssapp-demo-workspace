@@ -13,11 +13,18 @@ function readConfig() {
 	} catch (err) {
 		if (err.code === "MODULE_NOT_FOUND") {
 			config = createBasicConfig();
+			let privateSkyRepo;
+			console.log("Looking for PRIVATESKY_REPO_NAME as env variable. It can be used to change what PrivateSky repo will be user: psk-release or privatesky.");
+			if(typeof process.env.PRIVATESKY_REPO_NAME !== "undefined"){
+				privateSkyRepo = process.env.PRIVATESKY_REPO_NAME;
+			}else{
+				privateSkyRepo = "privatesky";
+			}
 			// we need a default privatesky instance in order to have access to Brick Storage
 			config.dependencies.push(
 				{
-					"name": "psk-release",
-					"src": "http://github.com/privatesky/psk-release.git",
+					"name": "privatesky",
+					"src": `http://github.com/privatesky/${privateSkyRepo}.git`,
 					"actions": [
 						{
 							"type": "smartClone",
@@ -25,7 +32,7 @@ function readConfig() {
 						},
 						{
 							"type": "execute",
-							"cmd": "cd ./psk-release && npm install"
+							"cmd": `cd ./privatesky && npm install`
 						}
 					]
 				});
