@@ -1,6 +1,5 @@
 const path = require("path");
 const CONFIG_FILE_PATH = path.resolve(path.join(__dirname, "./../octopus.json"));
-console.log(CONFIG_FILE_PATH);
 
 function createBasicConfig(...configParts) {
 	return {"workDir": ".", "dependencies": [...configParts]};
@@ -60,8 +59,10 @@ function runConfig(config, callback) {
 }
 
 function handleError(...args){
+	const exitCode = 1;
 	console.log(...args);
-	process.exit(1);
+	console.log("Exit code:", exitCode);
+	process.exit(exitCode);
 }
 
 module.exports = {

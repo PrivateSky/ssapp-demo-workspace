@@ -8,7 +8,7 @@ args.splice(0, 2);
 
 const octopus = require("./index");
 if (args.length > 1) {
-	octopus.handleError(("Expected to receive maximum 1 param: folderName that needs to be updated");
+	octopus.handleError("Expected to receive maximum 1 param: folderName that needs to be updated");
 }
 
 const folderName = args[0];

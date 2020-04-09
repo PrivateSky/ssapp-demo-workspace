@@ -11,7 +11,7 @@ if(args.length <2){
 
 let fileArg = args.shift();
 if(fileArg.indexOf(argIdentifier) === -1){
-	octopus.handleError((errorMessage);
+	octopus.handleError(errorMessage);
 }
 fileArg = fileArg.replace(argIdentifier, "");
 
@@ -19,7 +19,7 @@ let envJson;
 try{
 	envJson = require(fileArg);
 }catch(err){
-	octopus.handleError(("env file not found or contains an invalid JSON!");
+	octopus.handleError("env file not found or contains an invalid JSON!");
 }
 
 const {spawn} = require("child_process");
