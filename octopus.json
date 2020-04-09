@@ -11,7 +11,7 @@
 		},
 		{
 		  "type": "execute",
-		  "cmd": "cd ./privatesky && npm install"
+		  "cmd": "cd ./privatesky && npm install && npm run build"
 		}
 	  ]
 	},
@@ -42,10 +42,6 @@
 		{
 		  "type": "execute",
 		  "cmd": "cd profile-app && npm install"
-		},
-		{
-		  "type": "execute",
-		  "cmd": "cd profile-app && npm run build"
 		}
 	  ]
 	}
