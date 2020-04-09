@@ -59,9 +59,15 @@ function runConfig(config, callback) {
 	updater.run(config, callback);
 }
 
+function handleError(...args){
+	console.log(...args);
+	process.exit(1);
+}
+
 module.exports = {
 	createBasicConfig,
 	readConfig,
 	updateConfig,
-	runConfig
+	runConfig,
+	handleError
 };

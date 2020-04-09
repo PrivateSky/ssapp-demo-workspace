@@ -1,15 +1,14 @@
 const args = process.argv;
 args.splice(0, 2);
 
+const octopus = require("./index.js");
 if (args.length !== 2) {
-	console.log("args", ...args);
-	throw new Error("Expected to receive 2 params: folderName and gitUrl.");
+	octopus.handleError("Expected to receive 2 params: folderName and gitUrl.");
 }
 
 const folderName = args[0];
 const gitUrl = args[1];
 
-const octopus = require("./index.js");
 const BASIC_CONFIG_ELEMENT = {
 	"name": folderName,
 	"src": gitUrl,
@@ -29,7 +28,7 @@ for (let i = 0; i < config.dependencies.length; i++) {
 	let dep = config.dependencies[i];
 	if (dep.name === folderName) {
 		//console.log("Config found", dep);
-		throw new Error(`There is a configuration for "${folderName}"`);
+		octopus.handleError(`There is a configuration for "${folderName}"`);
 	}
 }
 

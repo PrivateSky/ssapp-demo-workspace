@@ -1,15 +1,13 @@
 const args = process.argv;
 args.splice(0, 2);
 
+const octopus = require("./index.js");
 if (args.length !== 2) {
-	console.log("args", ...args);
-	throw new Error("Expected to receive 2 params: <loaderFolderName> and <walletFolderName>.");
+	octopus.handleError("Expected to receive 2 params: <loaderFolderName> and <walletFolderName>.");
 }
 
 const loaderFolderName = args[0];
 const walletFolderName = args[1];
-
-const octopus = require("./index.js");
 
 const config = octopus.readConfig();
 
@@ -36,11 +34,11 @@ for (let i = 0; i < config.dependencies.length; i++) {
 }
 
 if (typeof loaderConfigIndex === "undefined") {
-	throw new Error(`Unable to find a loader config called "${loaderFolderName}"`)
+	octopus.handleError(`Unable to find a loader config called "${loaderFolderName}"`)
 }
 
 if (typeof walletConfigIndex === "undefined") {
-	throw new Error(`Unable to find a wallet config called "${walletFolderName}"`)
+	octopus.handleError(`Unable to find a wallet config called "${walletFolderName}"`)
 }
 
 if (typeof binDep === "undefined") {
