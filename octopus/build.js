@@ -21,20 +21,9 @@ if (typeof configPart === "undefined") {
 	octopus.handleError(`No config found for target "${folderName}"`);
 }
 
-configPart.actions.push({
-	"type": "execute",
-	"cmd": `cd ${folderName} && npm run build`
-});
-
 octopus.runConfig(octopus.createBasicConfig(configPart), function (err, result) {
 	if (err) {
 		throw err;
 	}
-
-	octopus.updateConfig(config, function (err) {
-		if (err) {
-			throw err;
-		}
-		console.log("Configuration updated!");
-	});
+	console.log("Build process finish.");
 });
