@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node ./octopus/install",
-    "add": "node ./octopus/add",
-    "postadd": "node ./octopus/install",
-    "build": "node ./octopus/build",
-    "update": "node ./octopus/update",
-    "bind": "node ./octopus/bind",
-    "brick-storage": "node ./octopus/setEnv --file=../env.json \"cd privatesky && npm run start\"",
+    "postinstall": "node ./node_modules/octopus/scripts/install",
+    "add": "node ./node_modules/octopus/scripts/add",
+    "add-loader": "node ./node_modules/octopus/scripts/add",
+    "build": "node ./node_modules/octopus/scripts/build",
+    "update": "node ./node_modules/octopus/scripts/update",
+    "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
+    "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
+    "brick-storage": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
     "web-server": "ws --spa ./web-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +26,7 @@
   },
   "homepage": "https://github.com/PrivateSky/web-wallet#readme",
   "dependencies": {
-    "deployer": "git+http://github.com/privatesky/updater.git",
+    "octopus": "git+http://github.com/privatesky/updater.git",
     "local-web-server": "^4.0.0"
   }
 }
