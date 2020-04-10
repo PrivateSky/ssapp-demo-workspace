@@ -1,0 +1,123 @@
+{
+  "workDir": ".",
+  "dependencies": [
+	{
+	  "name": "privatesky",
+	  "src": "http://github.com/privatesky/privatesky.git",
+	  "actions": [
+		{
+		  "type": "smartClone",
+		  "target": "."
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd ./privatesky && npm install && npm run build"
+		}
+	  ]
+	},
+	{
+	  "name": "menu-wallet",
+	  "src": "http://github.com/privatesky/menu-wallet.git",
+	  "actions": [
+		{
+		  "type": "smartClone",
+		  "target": ".",
+		  "collectLog": false
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd menu-wallet && npm install"
+		}
+	  ]
+	},
+	{
+	  "name": "profile-app",
+	  "src": "http://github.com/privatesky/profile-app.git",
+	  "actions": [
+		{
+		  "type": "smartClone",
+		  "target": ".",
+		  "collectLog": false
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd profile-app && npm install"
+		}
+	  ]
+	},
+	{
+	  "name": "secure-channels",
+	  "src": "http://github.com/privatesky/secure-channels.git",
+	  "actions": [
+		{
+		  "type": "smartClone",
+		  "target": ".",
+		  "collectLog": false
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd secure-channels && npm install"
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd secure-channels && npm build"
+		}
+	  ]
+	},
+	{
+	  "name": "web-server/secure-channels/loader",
+	  "src": "http://github.com/privatesky/web-dossier-loader.git",
+	  "actions": [
+		{
+		  "type": "smartClone",
+		  "target": ".",
+		  "collectLog": false
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd web-server/secure-channels/loader && npm install"
+		},
+		{
+		  "type": "execute",
+		  "cmd": "cd web-server/secure-channels/loader && npm build"
+		}
+	  ]
+	},
+	{
+	  "name": "secure-channels_bind_to_menu-wallet",
+	  "src": "",
+	  "actions": [
+		{
+		  "type": "copy",
+		  "src": "./menu-wallet/seed",
+		  "target": "./web-server/secure-channels/wallet-template/seed",
+		  "options": {
+			"overwrite": true
+		  }
+		}
+	  ]
+	},
+	{
+	  "name": "secure-channels_bind_to_profile-app",
+	  "src": "",
+	  "actions": [
+		{
+		  "type": "copy",
+		  "src": "./profile-app/seed",
+		  "target": "./web-server/secure-channels/apps/profile-app/seed",
+		  "options": {
+			"overwrite": true
+		  }
+		},
+		{
+		  "type": "mkdir",
+		  "target": "./web-server/secure-channels/profile-app-template"
+		},
+		{
+		  "type": "execute",
+		  "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/profile-app-template/readme"
+		}
+	  ]
+	}
+  ]
+}
