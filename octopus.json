@@ -58,10 +58,6 @@
 		{
 		  "type": "execute",
 		  "cmd": "cd secure-channels && npm install"
-		},
-		{
-		  "type": "execute",
-		  "cmd": "cd secure-channels && npm build"
 		}
 	  ]
 	},
@@ -77,10 +73,6 @@
 		{
 		  "type": "execute",
 		  "cmd": "cd web-server/secure-channels/loader && npm install"
-		},
-		{
-		  "type": "execute",
-		  "cmd": "cd web-server/secure-channels/loader && npm build"
 		}
 	  ]
 	}
