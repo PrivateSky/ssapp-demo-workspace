@@ -1,0 +1,1 @@
+{"workDir":".","dependencies":[{"name":"secure-channels_bind_to_menu-wallet","src":"","actions":[{"type":"execute","cmd":"cd menu-wallet && npm run build"},{"type":"copy","src":"./menu-wallet/seed","target":"./web-server/secure-channels/wallet-template/seed","options":{"overwrite":true}}]}]}

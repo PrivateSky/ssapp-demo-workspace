@@ -97,28 +97,6 @@
 		  }
 		}
 	  ]
-	},
-	{
-	  "name": "secure-channels_bind_to_profile-app",
-	  "src": "",
-	  "actions": [
-		{
-		  "type": "copy",
-		  "src": "./profile-app/seed",
-		  "target": "./web-server/secure-channels/apps/profile-app/seed",
-		  "options": {
-			"overwrite": true
-		  }
-		},
-		{
-		  "type": "mkdir",
-		  "target": "./web-server/secure-channels/profile-app-template"
-		},
-		{
-		  "type": "execute",
-		  "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/profile-app-template/readme"
-		}
-	  ]
 	}
   ]
 }
