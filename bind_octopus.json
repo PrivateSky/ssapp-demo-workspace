@@ -1,1 +1,75 @@
-{"workDir":".","dependencies":[{"name":"secure-channels_bind_to_menu-wallet","src":"","actions":[{"type":"execute","cmd":"cd menu-wallet && npm run build"},{"type":"copy","src":"./menu-wallet/seed","target":"./web-server/secure-channels/wallet-template/seed","options":{"overwrite":true}}]}]}
+{
+  "workDir": ".",
+  "dependencies": [
+	{
+	  "name": "secure-channels_bind_to_secure-channels",
+	  "src": "",
+	  "actions": [
+		{
+		  "type": "execute",
+		  "cmd": "cd secure-channels && npm run build"
+		},
+		{
+		  "type": "copy",
+		  "src": "./secure-channels/seed",
+		  "target": "./web-server/secure-channels/apps/secure-channels/seed",
+		  "options": {
+			"overwrite": true
+		  }
+		},
+		{
+		  "type": "mkdir",
+		  "target": "./web-server/secure-channels/secure-channels-template"
+		},
+		{
+		  "type": "execute",
+		  "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/secure-channels-template/readme"
+		}
+	  ]
+	},
+	{
+	  "name": "secure-channels_bind_to_profile-app",
+	  "src": "",
+	  "actions": [
+		{
+		  "type": "execute",
+		  "cmd": "cd profile-app && npm run build"
+		},
+		{
+		  "type": "copy",
+		  "src": "./profile-app/seed",
+		  "target": "./web-server/secure-channels/apps/profile-app/seed",
+		  "options": {
+			"overwrite": true
+		  }
+		},
+		{
+		  "type": "mkdir",
+		  "target": "./web-server/secure-channels/profile-app-template"
+		},
+		{
+		  "type": "execute",
+		  "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/profile-app-template/readme"
+		}
+	  ]
+	},
+	{
+	  "name": "secure-channels_bind_to_menu-wallet",
+	  "src": "",
+	  "actions": [
+		{
+		  "type": "execute",
+		  "cmd": "cd menu-wallet && npm run build"
+		},
+		{
+		  "type": "copy",
+		  "src": "./menu-wallet/seed",
+		  "target": "./web-server/secure-channels/wallet-template/seed",
+		  "options": {
+			"overwrite": true
+		  }
+		}
+	  ]
+	}
+  ]
+}
