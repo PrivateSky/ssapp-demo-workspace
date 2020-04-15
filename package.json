@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/PrivateSky/web-wallet#readme",
   "dependencies": {
-    "octopus": "git+http://github.com/privatesky/updater.git"
+    "octopus": "git+http://github.com/privatesky/octopus.git"
   }
 }
