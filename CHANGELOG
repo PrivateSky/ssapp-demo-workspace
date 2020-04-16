@@ -1,0 +1,10 @@
+# Changelog
+
+## [04.16.2020]
+
+### Implemented service worker brick caching
+
+- Added privatesky/psk-cache module
+- Changed privatesky dependencies & build configuration
+- Changed privatesky/bar,edfs
+- Updated swBoot.js in web-dossier-loader
