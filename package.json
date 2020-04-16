@@ -8,7 +8,7 @@
     "add": "node ./node_modules/octopus/scripts/add",
     "add-loader": "node ./node_modules/octopus/scripts/add",
     "build": "node ./node_modules/octopus/scripts/build",
-    "build-all": "node ./node_modules/octopus/scripts/install ./bind_octopus.json",
+    "build-all": "node ./node_modules/octopus/scripts/install build",
     "update": "node ./node_modules/octopus/scripts/update",
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
