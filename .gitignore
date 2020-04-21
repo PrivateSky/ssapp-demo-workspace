@@ -3,6 +3,8 @@
 
 # But not these files...
 !.gitignore
+!bin
+!bin/*
 !octopus
 !octopus/*
 !LICENSE
