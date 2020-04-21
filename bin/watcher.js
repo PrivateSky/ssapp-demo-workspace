@@ -60,35 +60,42 @@ for (let i = 0; i < argv.length; i++) {
     editConfig(argumentKey, argumentValue);
 }
 
-if (!config.watch) {
+if (!config.watch && !config.app) {
     process.exit(0);
 }
 
-const watchedPaths = config.watch.filter(path => path.length)
-                                  .map((dir) => {
-                                      return path.resolve(`${rootDir}${path.sep}${dir}`);
-                                  })
-                                  .join(',');
+if (config.watch) {
+    config.watch = !Array.isArray(config.watch) ? [config.watch] : config.watch;
+    const watchedPaths = config.watch.filter(path => path.length)
+        .map((dir) => {
+            return path.resolve(`${rootDir}${path.sep}${dir}`);
+        })
+        .join(',');
 
-const watchedApps = config.app.filter(path => path.length)
-                                  .map((dir) => {
-                                      return path.resolve(`${rootDir}${path.sep}${dir}`);
-                                  });
-
-for (const appPath of watchedApps) {
-    const appName = appPath.split(path.sep).pop();
-    const forkedProcess = childProcess.fork(watcherScriptPath, ['--watch', appPath,
-        '--run', rebuildAppScriptPath,
-        '--args', appName,
-        '--allowedFileExtensions=.js,.html,.css,.json',
-        '--ignore', '/code/constitution,/code/scripts/bundles']);
+    const forkedProcess = childProcess.fork(watcherScriptPath, ['--watch', watchedPaths, '--run', writeTimestampScriptPath, '--allowedFileExtensions=.js,.html,.css,.json']);
     forkedProcess.on('error', showProcessError);
     forkedProcesses.push(forkedProcess);
 }
 
-const forkedProcess = childProcess.fork(watcherScriptPath, ['--watch', watchedPaths, '--run', writeTimestampScriptPath, '--allowedFileExtensions=.js,.html,.css,.json']);
-forkedProcess.on('error', showProcessError);
-forkedProcesses.push(forkedProcess);
+
+if (config.app) {
+    config.app = !Array.isArray(config.app) ? [config.app] : config.app;
+    const watchedApps = config.app.filter(path => path.length)
+        .map((dir) => {
+            return path.resolve(`${rootDir}${path.sep}${dir}`);
+        });
+
+    for (const appPath of watchedApps) {
+        const appName = appPath.split(path.sep).pop();
+        const forkedProcess = childProcess.fork(watcherScriptPath, ['--watch', appPath,
+            '--run', rebuildAppScriptPath,
+            '--args', appName,
+            '--allowedFileExtensions=.js,.html,.css,.json',
+            '--ignore', '/code/constitution,/code/scripts/bundles']);
+        forkedProcess.on('error', showProcessError);
+        forkedProcesses.push(forkedProcess);
+    }
+}
 
 function showProcessError(err) {
     console.error(err);
