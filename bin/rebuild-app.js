@@ -3,6 +3,11 @@ const path = require('path');
 const childProcess = require('child_process');
 
 const rootDir = path.resolve(`${__dirname}${path.sep}..${path.sep}`);
+const writeTimestampScriptPath = [
+    rootDir,
+    'bin',
+    'write-timestamp.js'
+].join(path.sep);
 
 const argv = Object.assign([], process.argv);
 argv.shift();
@@ -26,6 +31,10 @@ const forkedProcess = childProcess.exec(`npm run build ${argv[0]}`, {
     }
 
     if (stdout) {
+        const forkedProcess = childProcess.fork(writeTimestampScriptPath);
+        forkedProcess.on('error', (err) => {
+            console.error(err);
+        })
         console.log(stdout)
     }
 
