@@ -6,7 +6,6 @@ const childProcess = require('child_process');
 
 const forkedProcesses = [];
 
-//const rootDir = path.resolve(`${__dirname}${path.sep}..${path.sep}..${path.sep}`);
 const rootDir = path.resolve([
     __dirname,
     path.sep,
