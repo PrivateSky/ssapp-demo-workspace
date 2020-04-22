@@ -4,8 +4,6 @@
 const path = require('path');
 const childProcess = require('child_process');
 
-const forkedProcesses = [];
-
 const rootDir = path.resolve([
     __dirname,
     path.sep,
@@ -30,16 +28,12 @@ const writeTimestampScriptPath = [
     'write-timestamp.js'
 ].join(path.sep);
 
-const rebuildAppScriptPath = [
-    rootDir,
-    'bin',
-    'watcher',
-    'rebuild-app.js'
-].join(path.sep);
+const appTemplatesToWatch = [];
+const childProcessesPIds = [];
 
 const config = {
-    files: '',
-    app: ''
+    app: '',
+    serverDocRoot: 'secure-channels'
 };
 
 const argv = Object.assign([], process.argv);
@@ -61,7 +55,7 @@ for (let i = 0; i < argv.length; i++) {
         argumentKey = argument.substr(0, separatorIndex);
         argumentValue = argument.substr(separatorIndex + 1);
     } else {
-        if (argv[i + 1].startsWith('--')) {
+        if (argv[i + 1] && argv[i + 1].startsWith('--')) {
             throw new Error(`Missing value for argument ${argument}`);
         }
 
@@ -73,28 +67,9 @@ for (let i = 0; i < argv.length; i++) {
     editConfig(argumentKey, argumentValue);
 }
 
-if (!config.files && !config.app) {
+if (!config.app) {
     showUsage();
     process.exit(0);
-}
-
-if (config.files) {
-    // Watch for changes in `web-server/secure-channels/` subfolders
-    // and write a "last-update.txt" timestamp file
-    config.files = !Array.isArray(config.files) ? [config.files] : config.files;
-    const watchedPaths = config.files.filter(path => path.length)
-        .map((dir) => {
-            return path.resolve(`${rootDir}${path.sep}${dir}`);
-        })
-        .join(',');
-
-    const forkedProcess = childProcess.fork(watcherScriptPath, [
-        '--watch', watchedPaths,
-        '--run', writeTimestampScriptPath,
-        '--allowedFileExtensions=.js,.html,.css,.json'
-    ]);
-    forkedProcess.on('error', showProcessError);
-    forkedProcesses.push(forkedProcess);
 }
 
 
@@ -108,22 +83,72 @@ if (config.app) {
         });
 
     for (const appPath of watchedApps) {
-        const appName = appPath.split(path.sep).pop();
-        const forkedProcess = childProcess.fork(watcherScriptPath, ['--watch', appPath,
-            '--run', rebuildAppScriptPath,
-            '--args', appName,
-            '--allowedFileExtensions=.js,.html,.css,.json',
-            '--ignore', '/code/constitution,/code/scripts/bundles']);
-        forkedProcess.on('error', showProcessError);
-        forkedProcesses.push(forkedProcess);
+        watchApplication(appPath);
     }
-}
 
-function showProcessError(err) {
-    console.error(err);
+    // Watch for changes in the template files
+    const proc = childProcess.fork(watcherScriptPath, [
+        '--watch', appTemplatesToWatch.join(','),
+        '--run', writeTimestampScriptPath,
+        '--allowedFileExtensions=.js,.html,.css,.json'
+    ])
+    childProcessesPIds.push(proc.pid);
+    proc.on('error', (error) => {
+        console.error(error);
+    })
+
+    // Make sure we kill any spawned children before exiting
+    process.on('SIGINT', exitHandler);
+    process.on('SIGTERM', exitHandler);
 }
 
 /* ------------ Utils functions ------------ */
+
+function watchApplication(appPath) {
+    const appName = appPath.split(path.sep).pop();
+
+    addAppTemplateToWatchList(appName);
+
+    // Watch the application directory for changes
+    const proc = childProcess.fork(watcherScriptPath, ['--watch', appPath,
+        '--exec', `npm run build ${appName}`,
+        '--workingDirectory', rootDir,
+        '--allowedFileExtensions=.js,.html,.css,.json',
+        '--ignore', '/code/constitution,/code/scripts/bundles'], {
+            stdio: 'pipe'
+    });
+    childProcessesPIds.push(proc.pid);
+
+    proc.on('error', (error) => {
+        console.error(error);
+    });
+
+    proc.stdout.on('data', (data) => {
+        const output = data.toString();
+
+        // After finishing a build, write the 'last-update.txt' file
+        // so that the loader knows to clear the service workers cache
+        if (output.indexOf('finish.') !== -1) {
+            const proc = childProcess.fork(writeTimestampScriptPath);
+            proc.on('error', (err) => {
+                console.error(err);
+            })
+        }
+        console.log(output);
+    });
+}
+
+function addAppTemplateToWatchList(appName) {
+    const appTemplatePrefix = appName === 'menu-wallet' ? 'wallet' : appName;
+    const appTemplateDir = `${appTemplatePrefix}-template`;
+
+    appTemplatesToWatch.push(path.resolve([
+        rootDir,
+        'web-server',
+        config.serverDocRoot,
+        appTemplateDir
+    ].join(path.sep)));
+}
 
 function editConfig(key, value) {
     if (!config.hasOwnProperty(key)) {
@@ -138,6 +163,7 @@ function editConfig(key, value) {
 }
 
 function preprocessArgument(argument) {
+    argument = argument || '';
     let value = argument.split(',');
 
     if (value.length === 1) {
@@ -149,14 +175,23 @@ function preprocessArgument(argument) {
     return value;
 }
 
-function showUsage() {
-    console.log(`Usage: watcher.js --app=list,of,apps --files=list,of,files
+function exitHandler(signal) {
+    console.log(`Caught exit signal: ${signal}`);
+    for (const pid of childProcessesPIds) {
+        console.log(`Stopping ${pid}`);
+        process.kill(pid);
+    }
+    process.exit(signal);
+}
 
-    watcher.js --app=profile-app,menu-wallet --files=web-server/secure-channels/wallet-template
+function showUsage() {
+    console.log(`Usage: watcher.js --app=list,of,apps
+
+    watcher.js --app=profile-app,menu-wallet
 
 If running the script using "npm run watch" pass the arguments after the "--" separator:
 
-    npm run watch -- --app=profile-app
+    npm run watch -- --app=profile-app,menu-wallet
 `);
 
 }
