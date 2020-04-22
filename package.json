@@ -13,6 +13,7 @@
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
     "server": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
+    "watch": "node ./bin/watcher/watcher.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
