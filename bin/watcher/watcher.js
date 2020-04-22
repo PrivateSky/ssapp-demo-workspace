@@ -139,7 +139,11 @@ function watchApplication(appPath) {
 }
 
 function addAppTemplateToWatchList(appName) {
-    const appTemplatePrefix = appName === 'menu-wallet' ? 'wallet' : appName;
+    let appTemplatePrefix = appName;
+
+    if (appName.toLowerCase().indexOf('wallet') !== -1) {
+        appTemplatePrefix = 'wallet';
+    }
     const appTemplateDir = `${appTemplatePrefix}-template`;
 
     appTemplatesToWatch.push(path.resolve([
