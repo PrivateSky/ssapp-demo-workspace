@@ -13,7 +13,7 @@
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
     "server": "node ./node_modules/octopus/scripts/setEnv --file=../../../env.json \"cd privatesky && npm run start\"",
-    "watch-all": "node ./bin/watcher/watcher.js --app=profile-app,secure-channels --files=web-server/secure-channels/apps,web-server/secure-channels/profile-app-template,web-server/secure-channels/secure-channels-template,web-server/secure-channels/wallet-template",
+    "watch-all": "node ./bin/watcher/watcher.js --app=profile-app,secure-channels,menu-wallet --files=web-server/secure-channels/apps,web-server/secure-channels/profile-app-template,web-server/secure-channels/secure-channels-template,web-server/secure-channels/wallet-template",
     "watch": "node ./bin/watcher/watcher.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
