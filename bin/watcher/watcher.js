@@ -74,11 +74,12 @@ for (let i = 0; i < argv.length; i++) {
 }
 
 if (!config.files && !config.app) {
+    showUsage();
     process.exit(0);
 }
 
 if (config.files) {
-    // Watch for changes in `web-server/secture-channels/` subfolders
+    // Watch for changes in `web-server/secure-channels/` subfolders
     // and write a "last-update.txt" timestamp file
     config.files = !Array.isArray(config.files) ? [config.files] : config.files;
     const watchedPaths = config.files.filter(path => path.length)
@@ -148,3 +149,14 @@ function preprocessArgument(argument) {
     return value;
 }
 
+function showUsage() {
+    console.log(`Usage: watcher.js --app=list,of,apps --files=list,of,files
+
+    watcher.js --app=profile-app,menu-wallet --files=web-server/secure-channels/wallet-template
+
+If running the script using "npm run watch" pass the arguments after the "--" separator:
+
+    npm run watch -- --app=profile-app
+`);
+
+}
