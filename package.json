@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node ./node_modules/octopus/scripts/install",
+    "postinstall": "node ./node_modules/octopus/scripts/run",
     "add": "node ./node_modules/octopus/scripts/add",
     "add-loader": "node ./node_modules/octopus/scripts/add",
     "build": "node ./node_modules/octopus/scripts/build",
-    "build-all": "node ./node_modules/octopus/scripts/install build",
+    "build-all": "node ./node_modules/octopus/scripts/run build",
     "update": "node ./node_modules/octopus/scripts/update",
     "bind-app": "node ./node_modules/octopus/scripts/bind --type=app",
     "bind-wallet": "node ./node_modules/octopus/scripts/bind --type=wallet",
@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/PrivateSky/web-wallet#readme",
   "dependencies": {
-    "octopus": "git+http://github.com/privatesky/octopus.git"
+    "octopus": "git+http://github.com/privatesky/octopus.git#1.0"
   }
 }
