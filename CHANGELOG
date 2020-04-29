@@ -1,5 +1,11 @@
 # Changelog
 
+## [04.28.2020]
+
+### Fixed issue with service worker loosing state
+- Changed loader (web-dossier-loader)
+- Changed privatesky/swarm-engine,ssapp-middleware
+
 ## [04.22.2020]
 
 ### Implemented "watch" feature
