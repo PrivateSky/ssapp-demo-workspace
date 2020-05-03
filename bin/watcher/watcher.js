@@ -70,6 +70,7 @@ if (config.app) {
     const proc = childProcess.fork(watcherScriptPath, [
         '--watch', appTemplatesToWatch.join(','),
         '--run', writeTimestampScriptPath,
+        '--args', `--dir ${config.serverDocRoot}`,
         '--allowedFileExtensions=.js,.html,.css,.json'
     ])
     childProcessesPIds.push(proc.pid);
@@ -94,7 +95,7 @@ function watchApplication(appPath) {
         '--exec', `npm run build ${appName}`,
         '--workingDirectory', rootDir,
         '--allowedFileExtensions=.js,.html,.css,.json',
-        '--ignore', '/code/constitution,/code/scripts/bundles'], {
+        '--ignore', '/code/constitution,/code/scripts/bundles,/build/tmp,/builds/tmp'], {
             stdio: 'pipe'
     });
     childProcessesPIds.push(proc.pid);
@@ -109,7 +110,9 @@ function watchApplication(appPath) {
         // After finishing a build, write the 'last-update.txt' file
         // so that the loader knows to clear the service workers cache
         if (output.indexOf('finish.') !== -1) {
-            const proc = childProcess.fork(writeTimestampScriptPath);
+            const proc = childProcess.fork(writeTimestampScriptPath, [
+                '--dir', config.serverDocRoot
+            ]);
             proc.on('error', (err) => {
                 console.error(err);
             })
@@ -169,13 +172,13 @@ function exitHandler(signal) {
 }
 
 function showUsage() {
-    console.log(`Usage: watcher.js --app=list,of,apps
+    console.log(`Usage: watcher.js --app=list,of,apps [--serverDocRoot=secure-channels]
 
-    watcher.js --app=profile-app,menu-wallet
+    watcher.js --app=profile-app,menu-wallet [--serverDocRoot=secure-channels]
 
 If running the script using "npm run watch" pass the arguments after the "--" separator:
 
-    npm run watch -- --app=profile-app,menu-wallet
+    npm run watch -- --app=profile-app,menu-wallet [--serverDocRoot=secure-channels]
 `);
 
 }

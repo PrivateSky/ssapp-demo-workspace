@@ -12,6 +12,27 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.resolve([__dirname, '..', '..'].join(path.sep));
-const lastUpdateFile = [rootDir, 'web-server', 'secure-channels', 'last-update.txt'].join(path.sep);
+
+const argv = Object.assign([], process.argv);
+argv.shift();
+argv.shift();
+
+let baseDir;
+
+for (let i = 0; i < argv.length; i++) {
+    if (argv[i] !== '--dir') {
+        continue;
+    }
+
+    baseDir = argv[i + 1];
+    break;
+}
+
+if (!baseDir) {
+    console.log('Usage: write-timestamp.js --dir=directory,relative,to,web-server');
+    process.exit(1);
+}
+
+const lastUpdateFile = [rootDir, 'web-server', baseDir, 'last-update.txt'].join(path.sep);
 
 fs.writeFileSync(lastUpdateFile, Date.now().toString());
