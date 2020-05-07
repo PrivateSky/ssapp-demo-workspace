@@ -1,5 +1,7 @@
 {
-  "basePagesUrl": "/pages",
+  "theme":"default",
+  "appVersion":"1.0.1",
+  "basePagesUrl": "/pages/",
   "profile": {
     "username": "Secure Channels",
     "email": "sinica@axiologic.net",
@@ -28,7 +30,12 @@
         "name": "Contacts"
       },
       {
-        "name": "Profile"
+        "name": "Profile",
+        "children":[
+          {"name":"View"},
+          {"name":"Edit"},
+          {"name":"Share"}
+        ]
       }
     ]
   }
