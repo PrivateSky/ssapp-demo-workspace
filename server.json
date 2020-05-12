@@ -2,7 +2,7 @@
   "port": 8080,
   "storage": "../web-server",
   "zeromqForwardAddress": "tcp://127.0.0.1:5001",
-  "endpoints": ["virtualMQ", "edfs", "filesManager", "dossierWizard", "staticServer"],
+  "endpoints": ["virtualMQ", "edfs", "filesManager", "dossier-wizard", "staticServer"],
   "endpointsConfig": {
     "virtualMQ": {
       "path": "./modules/psk-webserver/ChannelsManager.js",
