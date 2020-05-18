@@ -4,6 +4,7 @@
   "zeromqForwardAddress": "tcp://127.0.0.1:5001",
   "endpoints": [
     "virtualMQ",
+    "anchoring",
     "staticServer",
     "edfs",
     "filesManager",
@@ -21,6 +22,9 @@
     },
     "edfs": {
       "path": "edfs-middleware"
+    },
+    "anchoring": {
+      "path": "./modules/psk-webserver/AnchoringService.js"
     },
     "dossier-wizard": {
       "path": "dossier-wizard"
