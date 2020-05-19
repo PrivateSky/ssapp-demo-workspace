@@ -1,39 +1,4 @@
 {
   "port": 8080,
-  "storage": "../web-server",
-  "zeromqForwardAddress": "tcp://127.0.0.1:5001",
-  "endpoints": [
-    "virtualMQ",
-    "anchoring",
-    "staticServer",
-    "edfs",
-    "filesManager",
-    "dossier-wizard"
-  ],
-  "endpointsConfig": {
-    "virtualMQ": {
-      "path": "./modules/psk-webserver/ChannelsManager.js",
-      "channelsFolderName": "channels",
-      "maxSize": 100,
-      "tokenSize": 48,
-      "tokenHeaderName": "x-tokenHeader",
-      "signatureHeaderName": "x-signature",
-      "enableSignatureCheck": true
-    },
-    "edfs": {
-      "path": "edfs-middleware"
-    },
-    "anchoring": {
-      "path": "./modules/psk-webserver/AnchoringService.js"
-    },
-    "dossier-wizard": {
-      "path": "dossier-wizard"
-    },
-    "filesManager": {
-      "path": "./modules/psk-webserver/FilesManager.js"
-    },
-    "staticServer": {
-      "path": "./modules/psk-webserver/StaticServer.js"
-    }
-  }
+  "storage": "../web-server"
 }
