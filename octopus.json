@@ -200,21 +200,5 @@
         }
       ]
     }
-  ],
-  "server": [
-    {
-      "name": "server configuration update",
-      "src": "",
-      "actions": [
-        {
-          "type": "copy",
-          "src": "server.json",
-          "target": "./privatesky/conf/server.json",
-          "options": {
-            "overwrite": true
-          }
-        }
-      ]
-    }
   ]
 }
