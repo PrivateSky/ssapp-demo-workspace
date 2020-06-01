@@ -21,8 +21,8 @@
       ]
     },
     {
-      "name": "menu-wallet",
-      "src": "http://github.com/privatesky/menu-wallet.git",
+      "name": "menu-wallet-prototype",
+      "src": "http://github.com/privatesky/menu-wallet-prototype.git",
       "actions": [
         {
           "type": "smartClone",
@@ -31,13 +31,13 @@
         },
         {
           "type": "execute",
-          "cmd": "cd menu-wallet && npm install"
+          "cmd": "cd menu-wallet-prototype && npm install"
         }
       ]
     },
     {
-      "name": "profile-app",
-      "src": "http://github.com/privatesky/profile-app.git",
+      "name": "profile-ssapp-prototype",
+      "src": "http://github.com/privatesky/profile-ssapp-prototype.git",
       "actions": [
         {
           "type": "smartClone",
@@ -46,13 +46,13 @@
         },
         {
           "type": "execute",
-          "cmd": "cd profile-app && npm install"
+          "cmd": "cd profile-ssapp-prototype && npm install"
         }
       ]
     },
     {
-      "name": "secure-channels",
-      "src": "http://github.com/privatesky/secure-channels.git",
+      "name": "secure-channels-ssapp-prototype",
+      "src": "http://github.com/privatesky/secure-channels-ssapp-prototype.git",
       "actions": [
         {
           "type": "smartClone",
@@ -61,7 +61,7 @@
         },
         {
           "type": "execute",
-          "cmd": "cd secure-channels && npm install"
+          "cmd": "cd secure-channels-ssapp-prototype && npm install"
         }
       ]
     },
@@ -81,8 +81,8 @@
       ]
     },
     {
-      "name": "dossier-explorer-wallet",
-      "src": "http://github.com/privatesky/dossier-explorer-wallet.git",
+      "name": "dossier-explorer-wallet-prototype",
+      "src": "http://github.com/privatesky/dossier-explorer-wallet-prototype.git",
       "actions": [
         {
           "type": "smartClone",
@@ -91,12 +91,12 @@
         },
         {
           "type": "execute",
-          "cmd": "cd dossier-explorer-wallet && npm install"
+          "cmd": "cd dossier-explorer-wallet-prototype && npm install"
         }
       ]
     },
     {
-      "name": "web-server/dossier-explorer/loader",
+      "name": "web-server/web-wallet/loader",
       "src": "http://github.com/privatesky/web-dossier-loader.git",
       "actions": [
         {
@@ -106,75 +106,67 @@
         },
         {
           "type": "execute",
-          "cmd": "cd web-server/dossier-explorer/loader && npm install"
+          "cmd": "cd web-server/web-loader/loader && npm install"
         }
       ]
     }
   ],
   "build": [
     {
-      "name": "secure-channels_bind_to_secure-channels",
+      "name": "secure-channels_bind_to_secure-channels-ssapp-prototype",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd secure-channels && npm run build"
+          "cmd": "cd secure-channels-ssapp-prototype && npm run build"
         },
         {
           "type": "copy",
-          "src": "./secure-channels/seed",
-          "target": "./web-server/secure-channels/apps/secure-channels/seed",
+          "src": "./secure-channels-ssapp-prototype/seed",
+          "target": "./web-server/secure-channels/apps/secure-channels-ssapp/seed",
           "options": {
             "overwrite": true
           }
         },
         {
-          "type": "mkdir",
-          "target": "./web-server/secure-channels/secure-channels-template"
-        },
-        {
           "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/secure-channels-template/readme"
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps/secure-channels-ssapp/readme"
         }
       ]
     },
     {
-      "name": "secure-channels_bind_to_profile-app",
+      "name": "secure-channels_bind_to_profile-ssapp-prototype",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd profile-app && npm run build"
+          "cmd": "cd profile-ssapp-prototype && npm run build"
         },
         {
           "type": "copy",
-          "src": "./profile-app/seed",
-          "target": "./web-server/secure-channels/apps/profile-app/seed",
+          "src": "./profile-ssapp-prototype/seed",
+          "target": "./web-server/secure-channels/apps/profile-ssapp-prototype/seed",
           "options": {
             "overwrite": true
           }
         },
         {
-          "type": "mkdir",
-          "target": "./web-server/secure-channels/profile-app-template"
-        },
-        {
           "type": "execute",
-          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/profile-app-template/readme"
+          "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps/profile-ssapp/readme"
         }
       ]
     },
     {
-      "name": "secure-channels_bind_to_menu-wallet",
+      "name": "secure-channels_bind_to_menu-wallet-prototype",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd menu-wallet && npm run build"
+          "cmd": "cd menu-wallet-prototype && npm run build"
         },
         {
           "type": "copy",
-          "src": "./menu-wallet/seed",
+          "src": "./menu-wallet-prototype/seed",
           "target": "./web-server/secure-channels/wallet-template/seed",
           "options": {
             "overwrite": true
@@ -183,17 +175,17 @@
       ]
     },
     {
-      "name": "dossier-explorer_bind_to_dossier-explorer-wallet",
+      "name": "web-wallet_bind_to_dossier-explorer-wallet-prototype",
       "src": "",
       "actions": [
         {
           "type": "execute",
-          "cmd": "cd dossier-explorer-wallet && npm run build"
+          "cmd": "cd dossier-explorer-wallet-prototype && npm run build"
         },
         {
           "type": "copy",
-          "src": "./dossier-explorer-wallet/seed",
-          "target": "./web-server/dossier-explorer/wallet-template/seed",
+          "src": "./dossier-explorer-wallet-prototype/seed",
+          "target": "./web-server/web-wallet/wallet-template/seed",
           "options": {
             "overwrite": true
           }
