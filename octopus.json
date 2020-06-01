@@ -145,7 +145,7 @@
         {
           "type": "copy",
           "src": "./profile-ssapp-prototype/seed",
-          "target": "./web-server/secure-channels/apps/profile-ssapp-prototype/seed",
+          "target": "./web-server/secure-channels/apps/profile-ssapp/seed",
           "options": {
             "overwrite": true
           }
