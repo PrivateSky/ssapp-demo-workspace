@@ -123,11 +123,17 @@ function watchApplication(appPath) {
 
 function addAppTemplateToWatchList(appName) {
     let appTemplatePrefix = appName;
+    let appTemplateDir;
+
+    if (appTemplatePrefix.endsWith('-prototype')) {
+        appTemplatePrefix = appTemplatePrefix.substr(0, appTemplatePrefix.lastIndexOf('-prototype'));
+    }
 
     if (appName.toLowerCase().indexOf('wallet') !== -1) {
-        appTemplatePrefix = 'wallet';
+        appTemplateDir = 'wallet-template';
+    } else {
+        appTemplateDir = ['apps', appTemplatePrefix].join(path.sep);
     }
-    const appTemplateDir = `${appTemplatePrefix}-template`;
 
     appTemplatesToWatch.push(path.resolve([
         rootDir,
