@@ -106,7 +106,7 @@
         },
         {
           "type": "execute",
-          "cmd": "cd web-server/web-loader/loader && npm install"
+          "cmd": "cd web-server/web-wallet/loader && npm install"
         }
       ]
     }
