@@ -2,6 +2,25 @@
     "workDir": ".",
     "dependencies": [
         {
+            "name": "cardinal",
+            "src": "http://github.com/privatesky/cardinal.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build"
+                }
+            ]
+        },
+        {
             "name": "privatesky",
             "src": "http://github.com/privatesky/privatesky.git",
             "actions": [
@@ -118,11 +137,24 @@
                     "type": "smartClone",
                     "target": ".",
                     "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/clear-sky-theme && npm install"
                 }
             ]
         }
     ],
-    "build": [
+    "build": [{
+            "name": "cardinal-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build-dossier"
+                }
+            ]
+        },
         {
             "name": "secure-channels_bind_to_secure-channels-ssapp-prototype",
             "src": "",
