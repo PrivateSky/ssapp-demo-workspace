@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PrivateSky/web-wallet.git"
+    "url": "git+https://github.com/PrivateSky/ssapp-demo-workspace.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PrivateSky/web-wallet/issues"
+    "url": "https://github.com/PrivateSky/ssapp-demo-workspace/issues"
   },
-  "homepage": "https://github.com/PrivateSky/web-wallet#readme",
+  "homepage": "https://github.com/PrivateSky/ssapp-demo-workspace#readme",
   "dependencies": {
     "octopus": "git+http://github.com/privatesky/octopus.git#1.0.4"
   }
