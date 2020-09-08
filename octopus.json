@@ -2,6 +2,21 @@
     "workDir": ".",
     "dependencies": [
         {
+            "name": "privatesky",
+            "src": "http://github.com/privatesky/privatesky.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm install"
+                }
+            ]
+        },
+        {
             "name": "cardinal",
             "src": "http://github.com/privatesky/cardinal.git",
             "actions": [
@@ -17,25 +32,6 @@
                 {
                     "type": "execute",
                     "cmd": "cd cardinal && npm run build"
-                }
-            ]
-        },
-        {
-            "name": "privatesky",
-            "src": "http://github.com/privatesky/privatesky.git",
-            "actions": [
-                {
-                    "type": "smartClone",
-                    "target": ".",
-                    "collectLog": false
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd privatesky && npm install"
-                },
-                {
-                    "type": "execute",
-                    "cmd": "cd privatesky && npm run build"
                 }
             ]
         },
@@ -158,6 +154,21 @@
                     "cmd": "cd themes/blue-fluorite-theme && npm install"
                 }
             ]
+        },
+        {
+            "name": "dossier-explorer-ssapp",
+            "src": "https://github.com/PrivateSky/dossier-explorer-ssapp.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-ssapp && npm install"
+                }
+            ]
         }
     ],
     "build": [
@@ -268,6 +279,28 @@
                     "options": {
                         "overwrite": true
                     }
+                }
+            ]
+        },
+        {
+            "name": "web-wallet_bind_to_dossier-explorer-ssapp",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd dossier-explorer-ssapp && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./dossier-explorer-ssapp/seed",
+                    "target": "./web-server/web-wallet/apps/dossier-explorer-ssapp/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "execute",
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/web-wallet/apps/dossier-explorer-ssapp/readme"
                 }
             ]
         }
