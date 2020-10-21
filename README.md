@@ -26,5 +26,6 @@ The last two commands you need to run in the *ssapp-demo-workspace* workspace
 $ npm run server
 $ npm run build-all
 ```
+The SSApp application loader is the first thing you will see after starting the web server and accessing http://localhost:8080/secure-channels/loader. It is a basic web application which allows creation and loading of wallets based on the menu wallet template. The SSApp loader registers a service worker responsible with loading the built SSApps from the Brick Storage.
 
-For more details about a *workspace* check out the [template-workspace](https://github.com/PrivateSky/template-workspace)
+For more details about a *workspace* check out the [template-workspace](https://github.com/PrivateSky/template-workspace).
