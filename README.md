@@ -1,6 +1,6 @@
 # ssapp-demo-workspace
 
-ssapp-demo-workspace is a an workspace that contains a list of SSApps and the code neccessary for the SSApps to work.
+*ssapp-demo-workspace*  bundles all the necessary dependencies for building and running SSApps in a single package.
 
 ### Installation
 
@@ -26,3 +26,5 @@ The last two commands you need to run in the *ssapp-demo-workspace* workspace
 $ npm run server
 $ npm run build-all
 ```
+
+For more details about a *workspace* check out the [template-workspace](https://github.com/PrivateSky/template-workspace)
