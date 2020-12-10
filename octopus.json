@@ -217,14 +217,14 @@
                 {
                     "type": "copy",
                     "src": "./secure-channels-ssapp-prototype/seed",
-                    "target": "./web-server/secure-channels/apps/secure-channels-ssapp/seed",
+                    "target": "./web-server/secure-channels/apps-patch/secure-channels-ssapp/seed",
                     "options": {
                         "overwrite": true
                     }
                 },
                 {
                     "type": "execute",
-                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps/secure-channels-ssapp/readme"
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps-patch/secure-channels-ssapp/readme"
                 }
             ]
         },
@@ -239,14 +239,14 @@
                 {
                     "type": "copy",
                     "src": "./profile-ssapp-prototype/seed",
-                    "target": "./web-server/secure-channels/apps/profile-ssapp/seed",
+                    "target": "./web-server/secure-channels/apps-patch/profile-ssapp/seed",
                     "options": {
                         "overwrite": true
                     }
                 },
                 {
                     "type": "execute",
-                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps/profile-ssapp/readme"
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/secure-channels/apps-patch/profile-ssapp/readme"
                 }
             ]
         },
@@ -261,7 +261,7 @@
                 {
                     "type": "copy",
                     "src": "./menu-wallet-prototype/seed",
-                    "target": "./web-server/secure-channels/wallet-template/seed",
+                    "target": "./web-server/secure-channels/wallet-patch/seed",
                     "options": {
                         "overwrite": true
                     }
@@ -279,7 +279,7 @@
                 {
                     "type": "copy",
                     "src": "./dossier-explorer-wallet-prototype/seed",
-                    "target": "./web-server/web-wallet/wallet-template/seed",
+                    "target": "./web-server/web-wallet/wallet-patch/seed",
                     "options": {
                         "overwrite": true
                     }
@@ -297,14 +297,27 @@
                 {
                     "type": "copy",
                     "src": "./dossier-explorer-ssapp/seed",
-                    "target": "./web-server/web-wallet/apps/dossier-explorer-ssapp/seed",
+                    "target": "./web-server/web-wallet/apps-patch/dossier-explorer-ssapp/seed",
                     "options": {
                         "overwrite": true
                     }
                 },
                 {
                     "type": "execute",
-                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/web-wallet/apps/dossier-explorer-ssapp/readme"
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/web-wallet/apps-patch/dossier-explorer-ssapp/readme"
+                }
+            ]
+        },
+        {
+            "name": "trust-loader-config",
+            "actions": [
+                {
+                    "type": "copy",
+                    "src": "./trust-loader-config",
+                    "target": "./web-server",
+                    "options": {
+                        "overwrite": true
+                    }
                 }
             ]
         }
